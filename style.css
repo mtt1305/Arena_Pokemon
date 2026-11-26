@@ -1,0 +1,459 @@
+/* Fonte usada na interface. Se não houver internet, entra a fonte do sistema. */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
+
+:root {
+    --cor-fundo: #0b0f19;
+    --cor-painel: #111624;
+    --cor-destaque: #6366f1;
+    --cor-destaque-rgb: 99, 102, 241;
+    --cor-texto-painel: #c7d2fe;
+    --cor-texto-titulo: #e0e7ff;
+    --cor-texto-label: #a5b4fc;
+    --cor-borda-input: #363c52;
+    --cor-texto-input: #f1f5f9;
+    --cor-placeholder: #8b94af;
+    --cor-erro: #ef4444;
+    --cor-texto-botao: #ffffff;
+
+    /* Complementos para os elementos adicionados à página original. */
+    --cor-texto-suave: #aeb8d0;
+    --cor-borda-suave: rgba(190, 205, 240, 0.15);
+    --cor-sucesso: #4ade80;
+}
+
+/* Configuração geral */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    color: var(--cor-texto-painel);
+    font-family: Nunito, Arial, Helvetica, sans-serif;
+    background:
+        radial-gradient(circle at 15% 0%, rgba(93, 63, 190, 0.22), transparent 35rem),
+        radial-gradient(circle at 100% 25%, rgba(14, 165, 233, 0.12), transparent 30rem),
+        var(--cor-fundo);
+}
+
+button,
+input {
+    font: inherit;
+}
+
+.pagina {
+    width: min(1100px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: 44px 0 28px;
+}
+
+/* Cabeçalho adicionado ao redor do formulário original */
+.cabecalho {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.etiqueta {
+    margin: 0 0 8px;
+    color: var(--cor-texto-label);
+    font-size: 0.72rem;
+    font-weight: 900;
+    letter-spacing: 0.18em;
+}
+
+.cabecalho h1 {
+    margin: 0 0 8px;
+    color: var(--cor-texto-titulo);
+    font-size: clamp(2.3rem, 6vw, 4rem);
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+}
+
+.subtitulo {
+    margin: 0;
+    color: var(--cor-texto-suave);
+}
+
+#pokemon {
+    display: grid;
+    grid-template-columns: minmax(110px, 0.75fr) minmax(0, 2fr);
+    gap: 20px;
+    max-width: 720px;
+    margin: 0 auto 52px;
+    padding: clamp(20px, 4vw, 32px);
+    color: var(--cor-texto-painel);
+    background: var(--cor-painel);
+    border: 1px solid var(--cor-borda-suave);
+    border-radius: 22px;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.2);
+}
+
+#titulo-principal {
+    grid-column: 1 / -1;
+    margin: 0 0 4px;
+    color: var(--cor-texto-titulo);
+    font-size: clamp(1.4rem, 4vw, 1.8rem);
+}
+
+.area {
+    display: grid;
+    grid-column: 1 / -1;
+    grid-template-columns: minmax(110px, 0.75fr) minmax(0, 2fr);
+    align-items: center;
+    gap: 10px 20px;
+}
+
+.area label {
+    color: var(--cor-texto-label);
+    font-size: 0.92rem;
+    font-weight: 800;
+}
+
+.area input {
+    width: 100%;
+    min-width: 0;
+    padding: 13px 14px;
+    color: var(--cor-texto-input);
+    background: #0d1426;
+    border: 1px solid var(--cor-borda-input);
+    border-radius: 11px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+
+.area input::placeholder {
+    color: var(--cor-placeholder);
+    opacity: 1;
+}
+
+.area input:focus {
+    border-color: var(--cor-destaque);
+    box-shadow: 0 0 0 3px rgba(var(--cor-destaque-rgb), 0.2);
+    transform: translateY(-1px);
+}
+
+.area input[readonly] {
+    color: var(--cor-texto-label);
+    background: #171d31;
+    cursor: default;
+}
+
+.area small {
+    grid-column: 2;
+    margin-top: -3px;
+    color: var(--cor-texto-suave);
+    font-size: 0.78rem;
+}
+
+/* Prévia da imagem buscada na PokéAPI */
+.previa-pokemon {
+    display: flex;
+    grid-column: 1 / -1;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 2px;
+}
+
+.previa-pokemon:empty {
+    display: none;
+}
+
+.previa-pokemon img {
+    width: 145px;
+    height: 145px;
+    object-fit: contain;
+    filter: drop-shadow(0 12px 18px rgba(0, 0, 0, 0.25));
+}
+
+/* Poder e tipo aparecem lado a lado em telas maiores. */
+.campos-duplos {
+    display: grid;
+    grid-column: 1 / -1;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.campos-duplos .area {
+    grid-column: auto;
+    grid-template-columns: minmax(0, 1fr);
+    align-content: start;
+    gap: 8px;
+}
+
+.campos-duplos .area small {
+    grid-column: auto;
+}
+
+.botoes-form {
+    display: flex;
+    grid-column: 1 / -1;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+}
+
+#btn-submit,
+#btn-reset {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 150px;
+    min-height: 42px;
+    padding: 10px 18px;
+    color: var(--cor-texto-botao);
+    border: 2px solid transparent;
+    border-radius: 10px;
+    font-weight: 900;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, transform 0.2s;
+}
+
+#btn-submit {
+    flex: 1;
+    background: linear-gradient(135deg, #7c3aed, var(--cor-destaque));
+}
+
+#btn-reset {
+    background: #29344d;
+    color: #d7def0;
+}
+
+#btn-submit:hover,
+#btn-reset:hover {
+    transform: translateY(-2px);
+}
+
+#btn-submit:hover {
+    background: #4f46e5;
+}
+
+#btn-reset:hover {
+    border-color: var(--cor-destaque);
+    background: #35415e;
+}
+
+#btn-submit:focus-visible,
+#btn-reset:focus-visible,
+.btn-remover:focus-visible {
+    outline: 3px solid #c4b5fd;
+    outline-offset: 3px;
+}
+
+.feedback {
+    grid-column: 1 / -1;
+    min-height: 1.25rem;
+    margin: -2px 0 0;
+    font-size: 0.9rem;
+    font-weight: 800;
+}
+
+.feedback:empty {
+    display: none;
+}
+
+/* Área da arena e contador */
+.secao-arena {
+    min-width: 0;
+}
+
+.titulo-arena {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.titulo-arena h2 {
+    margin: 0;
+    color: var(--cor-texto-titulo);
+    font-size: clamp(1.4rem, 4vw, 2rem);
+}
+
+.contador {
+    padding: 7px 12px;
+    color: #dbeafe;
+    background: rgba(29, 39, 64, 0.7);
+    border: 1px solid var(--cor-borda-suave);
+    border-radius: 999px;
+    font-size: 0.82rem;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+#container {
+    min-width: 0;
+}
+
+.lista-pokemon {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+/* Cards criados pelo JavaScript */
+.card-pokemon {
+    position: relative;
+    width: 190px;
+    padding: 34px 13px 14px;
+    overflow: hidden;
+    color: #202033;
+    text-align: center;
+    border: 3px solid #7f8c8d;
+    border-radius: 17px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    animation: aparecer 0.22s ease-out;
+}
+
+.card-pokemon-img {
+    width: 125px;
+    height: 125px;
+    object-fit: contain;
+}
+
+.card-pokemon-nome {
+    margin: 5px 0 10px;
+    font-size: 1.15rem;
+    font-weight: 900;
+    overflow-wrap: anywhere;
+}
+
+.card-pokemon-info {
+    margin: 7px 0;
+    font-size: 0.86rem;
+    font-weight: 800;
+    overflow-wrap: anywhere;
+}
+
+.btn-remover {
+    position: absolute;
+    z-index: 1;
+    top: 6px;
+    right: 6px;
+    display: grid;
+    place-items: center;
+    width: 27px;
+    height: 27px;
+    padding: 0;
+    color: #fff;
+    background: #dc2626;
+    border: 0;
+    border-radius: 50%;
+    font-size: 1.25rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.btn-remover:hover {
+    background: #991b1b;
+}
+
+.estado-vazio {
+    padding: 30px 15px;
+    color: var(--cor-texto-suave);
+    text-align: center;
+    border: 1px dashed #3b4663;
+    border-radius: 16px;
+}
+
+.estado-vazio.oculto {
+    display: none;
+}
+
+footer {
+    margin-top: 48px;
+    color: #77839f;
+    text-align: center;
+    font-size: 0.78rem;
+}
+
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/*
+ * CSS de autocomplete antigo comentado porque esta versão não cria uma lista
+ * de sugestões (#lista-sugestoes): ela completa o nome quando a busca é única.
+ *
+ * #lista-sugestoes button {
+ *     display: block;
+ *     width: 100%;
+ *     min-height: 36px;
+ *     margin: 0;
+ *     padding: 8px 12px;
+ *     color: #222;
+ *     background: #fff;
+ *     border: 0;
+ *     border-radius: 0;
+ *     text-align: left;
+ *     font: inherit;
+ *     cursor: pointer;
+ * }
+ *
+ * #lista-sugestoes button:hover {
+ *     color: #111;
+ *     background: #e5e7eb;
+ *     transform: none;
+ * }
+ */
+
+/* Ajustes para celular */
+@media (max-width: 560px) {
+    .pagina {
+        width: calc(100% - 22px);
+        padding-top: 30px;
+    }
+
+    #pokemon {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 16px;
+    }
+
+    .area,
+    .campos-duplos .area {
+        grid-column: 1 / -1;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 8px;
+    }
+
+    .area small {
+        grid-column: auto;
+    }
+
+    .campos-duplos {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 16px;
+    }
+
+    .titulo-arena {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .botoes-form {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    #btn-submit,
+    #btn-reset {
+        width: 100%;
+    }
+
+    .card-pokemon {
+        width: min(100%, 165px);
+    }
+}

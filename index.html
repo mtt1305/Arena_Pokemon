@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b0f19">
+    <title>Arena Pokémon | Cadastro</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="pagina">
+        <header class="cabecalho">
+            <p class="etiqueta">TREINADORES • BATALHAS • ESTRATÉGIA</p>
+            <h1>Arena Pokémon</h1>
+            <p class="subtitulo">Cadastre seu Pokémon e monte sua equipe.</p>
+        </header>
+
+        <form id="pokemon" class="painel" action="">
+            <h2 id="titulo-principal">Cadastre seu Pokémon</h2>
+
+            <div class="area">
+                <label for="nome">Nome do Pokémon</label>
+                <input
+                    id="nome"
+                    class="inputTxt"
+                    name="nome"
+                    type="text"
+                    placeholder="Ex.: Pikachu"
+                    autocomplete="off"
+                    required
+                >
+                <small>Digite pelo menos 3 letras para buscar na PokéAPI.</small>
+            </div>
+
+            <div id="imgPokemon" class="previa-pokemon" aria-live="polite"></div>
+
+            <div class="campos-duplos">
+                <div class="area">
+                    <label for="poder">Poder (CP)</label>
+                    <input
+                        id="poder"
+                        class="inputTxt"
+                        name="poder"
+                        type="number"
+                        min="100"
+                        placeholder="Preenchido pela API"
+                        required
+                    >
+                </div>
+
+                <div class="area">
+                    <label for="tipo">Tipo</label>
+                    <input
+                        id="tipo"
+                        class="inputTxt"
+                        name="tipo"
+                        type="text"
+                        placeholder="Preenchido pela API"
+                        readonly
+                    >
+                </div>
+            </div>
+
+            <div class="area">
+                <label for="treinador">Treinador</label>
+                <input
+                    id="treinador"
+                    class="inputTxt"
+                    name="treinador"
+                    type="text"
+                    placeholder="Nome do treinador"
+                    required
+                >
+            </div>
+
+            <div class="botoes-form">
+                <button id="btn-submit" type="submit">Adicionar à arena</button>
+                <button id="btn-reset" type="reset">Limpar</button>
+            </div>
+
+            <p id="feedback" class="feedback" role="status" aria-live="polite"></p>
+        </form>
+
+        <section class="secao-arena" aria-labelledby="titulo-arena">
+            <div class="titulo-arena">
+                <div>
+                    <p class="etiqueta">SUA EQUIPE</p>
+                    <h2 id="titulo-arena">Pokémon cadastrados</h2>
+                </div>
+                <span id="contador" class="contador">0 Pokémon</span>
+            </div>
+
+            <div id="container">
+                <div id="lista-pokemon" class="lista-pokemon"></div>
+                <p id="estado-vazio" class="estado-vazio">
+                    Sua arena está vazia. Cadastre o primeiro Pokémon!
+                </p>
+            </div>
+        </section>
+
+        <footer>Projeto de estudo • Dados fornecidos pela PokéAPI</footer>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
